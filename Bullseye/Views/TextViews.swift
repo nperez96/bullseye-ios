@@ -11,7 +11,6 @@ struct Instructions: View {
     VStack {
       TitleText(text: "🎯🎯🎯")
         .padding(EdgeInsets(top: 0.0, leading: 0.0, bottom: 8.0, trailing: 0.0))
-      ExtraTitleText(text: "89")
       DescriptionText(text: "PUT THE BULLSEYE AS CLOSE AS YOU CAN TO")
     }
   }

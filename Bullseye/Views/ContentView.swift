@@ -19,14 +19,18 @@ struct ContentView: View {
         Header(game: $game)
           .padding(Edge.Set.bottom, 100)
         HitmeButton {
-          isAlertVisible = true
+          withAnimation {
+            isAlertVisible = true
+          }
         }
       }.padding()
       SliderView(sliderValue: $sliderValue)
       if (isAlertVisible) {
         ScoreDialogView(sliderValue: $sliderValue, game: $game) {
-          isAlertVisible = false
-        }
+          withAnimation {
+            isAlertVisible = false
+          }
+        }.zIndex(1)
       }
     }
   }
