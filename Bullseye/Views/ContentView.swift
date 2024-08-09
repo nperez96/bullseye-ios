@@ -18,9 +18,16 @@ struct ContentView: View {
       VStack {
         Header(game: $game)
           .padding(Edge.Set.bottom, 100)
-        HitmeButton(sliderValue: $sliderValue, game: $game)
+        HitmeButton {
+          isAlertVisible = true
+        }
       }.padding()
       SliderView(sliderValue: $sliderValue)
+      if (isAlertVisible) {
+        ScoreDialogView(sliderValue: $sliderValue, game: $game) {
+          isAlertVisible = false
+        }
+      }
     }
   }
 }

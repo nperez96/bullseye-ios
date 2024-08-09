@@ -10,11 +10,10 @@ import SwiftUI
 struct HitmeButton: View {
   @State var isAlertVisible = false
   @State var alertMessage: String? = nil
-  @Binding var sliderValue: Double
-  @Binding var game: Game
+  var onButtonClick: () -> Void
   var body: some View {
     Button("Hit me".uppercased()) {
-      isAlertVisible = true
+      onButtonClick()
     }.font(.title3)
       .bold()
       .padding(30.0)
@@ -27,17 +26,6 @@ struct HitmeButton: View {
       }
       .foregroundColor(Color.white)
       .cornerRadius(21)
-      .alert("Hello World!", isPresented: $isAlertVisible, actions: {
-        Button("Awesome") {
-          game.startNewRound(score: game.points(sliderValue: sliderValue))
-        }
-      }, message: {
-        let score = game.points(sliderValue: sliderValue)
-        Text("""
-        The slider's value is \(Int(sliderValue.rounded()))
-        Your score is: \(score)
-        """)
-      })
   }
 }
 
@@ -89,7 +77,7 @@ struct StaticRectangleLabeledButton: View {
 
 #Preview {
   VStack(spacing: 10) {
-    HitmeButton(sliderValue: .constant(50.0), game: .constant(Game()))
+    HitmeButton {}
     RoundedButton(icon: "list.dash")
     RoundedButton(icon: "arrow.counterclockwise")
     StaticRectangleLabeledButton(labelText: "Score", score: 999)
