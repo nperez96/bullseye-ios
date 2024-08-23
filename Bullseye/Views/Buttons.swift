@@ -18,14 +18,14 @@ struct HitmeButton: View {
       .bold()
       .padding(30.0)
       .overlay {
-        RoundedRectangle(cornerRadius: 21.0).strokeBorder(Color.white, lineWidth: 3)
+        RoundedRectangle(cornerRadius: Constants.General.roundedRectCornerRadious).strokeBorder(Color.white, lineWidth: Constants.General.strokeWidth)
       }
       .background {
         Color("ButtonColor")
         LinearGradient(colors: [Color.white.opacity(0.3),Color.clear], startPoint: UnitPoint.top, endPoint: UnitPoint.bottom)
       }
       .foregroundColor(Color.white)
-      .cornerRadius(21)
+      .cornerRadius(Constants.General.roundedRectCornerRadious)
   }
 }
 
@@ -39,11 +39,11 @@ struct RoundedButton: View {
       ZStack {
         Circle()
           .fill(Color("ButtonBackgroundColor"))
-          .strokeBorder(Color("ButtonBorderColor"), lineWidth: 2.0)
+          .strokeBorder(Color("ButtonBorderColor"), lineWidth: Constants.General.strokeWidth)
         Image(systemName: icon)
           .font(.title3)
           .foregroundColor(Color("ButtonForegroundColor"))
-      }.frame(width: 56, height: 56)
+      }.frame(width:  Constants.General.roundedRectViewHeight, height:  Constants.General.roundedRectViewHeight)
     })
   }
 }
@@ -64,11 +64,11 @@ struct StaticRectangleLabeledButton: View {
         Text(String(score))
           .kerning(-0.2)
           .font(.title3)
-          .frame(width: 68, height: 56)
+          .frame(width: Constants.General.roundedRectViewWidth, height: Constants.General.roundedRectViewHeight)
           .foregroundStyle(Color("TextColor"))
           .overlay {
-            RoundedRectangle(cornerRadius: 21.0)
-              .stroke(Color("ButtonBorderColor"), lineWidth: 2.0)
+            RoundedRectangle(cornerRadius: Constants.General.roundedRectCornerRadious)
+              .stroke(Color("ButtonBorderColor"), lineWidth: Constants.General.strokeWidth)
           }
       }
     })

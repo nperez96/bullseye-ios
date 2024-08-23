@@ -50,7 +50,7 @@ struct ScoreDialogView: View {
     .frame(width: 315, height: 250)
     .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
     .background(Color("AppBackgroundWhite"))
-    .cornerRadius(21.0)
+    .cornerRadius(Constants.General.roundedRectCornerRadious)
   }
   
   func onAction() {
