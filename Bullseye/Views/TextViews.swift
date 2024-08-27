@@ -56,8 +56,20 @@ struct DescriptionText: View {
   }
 }
 
+struct LeaderBoardTitle: View {
+  var text: String
+  var body: some View {
+    Text(text.uppercased())
+      .fontWeight(.heavy)
+      .kerning(2.0)
+      .font(.title)
+    
+  }
+}
+
 #Preview {
   VStack {
+    LeaderBoardTitle(text: "Leaderboard")
     Instructions()
     TitleText(text: "🎯🎯🎯")
   }

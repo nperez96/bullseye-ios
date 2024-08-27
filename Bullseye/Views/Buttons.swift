@@ -32,17 +32,24 @@ struct HitmeButton: View {
 struct RoundedButton: View {
   var icon: String
   var action: (() -> Void)? = nil
+  var highContrast: Bool = false
+  @Environment(\.colorScheme) var scheme: ColorScheme
   var body: some View {
     Button(action: {
       action?()
     }, label: {
       ZStack {
+        let buttonBgColor = if (highContrast && scheme == ColorScheme.light) { Color.black } else { Color("ButtonBackgroundColor") }
+        let lineWidth = if (highContrast) { CGFloat(0) } else { Constants.General.strokeWidth }
         Circle()
-          .fill(Color("ButtonBackgroundColor"))
-          .strokeBorder(Color("ButtonBorderColor"), lineWidth: Constants.General.strokeWidth)
+          .fill(buttonBgColor)
+          .strokeBorder(Color("ButtonBorderColor"), lineWidth: lineWidth)
+        let buttonFgColor = if (highContrast && scheme == ColorScheme.light) { Color.white } else {
+          Color("ButtonForegroundColor")
+        }
         Image(systemName: icon)
           .font(.title3)
-          .foregroundColor(Color("ButtonForegroundColor"))
+          .foregroundColor(buttonFgColor)
       }.frame(width:  Constants.General.roundedRectViewHeight, height:  Constants.General.roundedRectViewHeight)
     })
   }
@@ -80,6 +87,7 @@ struct StaticRectangleLabeledButton: View {
     HitmeButton {}
     RoundedButton(icon: "list.dash")
     RoundedButton(icon: "arrow.counterclockwise")
+    RoundedButton(icon: "xmark", highContrast: true)
     StaticRectangleLabeledButton(labelText: "Score", score: 999)
   }
 }
