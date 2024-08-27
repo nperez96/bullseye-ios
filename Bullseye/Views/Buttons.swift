@@ -31,9 +31,9 @@ struct HitmeButton: View {
 
 struct RoundedButton: View {
   var icon: String
-  var action: (() -> Void)? = nil
   var highContrast: Bool = false
-  @Environment(\.colorScheme) var scheme: ColorScheme
+  var action: (() -> Void)? = nil
+  @Environment(\.colorScheme) private var scheme: ColorScheme
   var body: some View {
     Button(action: {
       action?()

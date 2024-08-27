@@ -14,7 +14,6 @@ struct ContentView: View {
   var body: some View {
     ZStack {
       BackgroundView(game: $game)
-        .ignoresSafeArea()
       VStack {
         Header(game: $game)
           .padding(Edge.Set.bottom, 100)

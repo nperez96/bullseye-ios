@@ -22,14 +22,21 @@ struct BackgroundView: View {
 
 private struct HeaderView: View {
   @Binding var game: Game
+  @State private var isLeaderBoardShowing = false
   var body: some View {
     HStack {
       RoundedButton(icon: "arrow.counterclockwise") {
         game.restart()
       }
       Spacer()
-      RoundedButton(icon: "list.dash")
-    }
+      RoundedButton(icon: "list.dash") {
+        isLeaderBoardShowing = true
+      }
+    }.sheet(isPresented: $isLeaderBoardShowing, content: {
+      LeaderBoardView {
+        isLeaderBoardShowing = false
+      }
+    })
   }
 }
 
