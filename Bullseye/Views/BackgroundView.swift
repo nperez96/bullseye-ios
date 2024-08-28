@@ -33,7 +33,7 @@ private struct HeaderView: View {
         isLeaderBoardShowing = true
       }
     }.sheet(isPresented: $isLeaderBoardShowing, content: {
-      LeaderBoardView {
+      LeaderBoardView(leaderboardEntries: $game.leaderboardEntries) {
         isLeaderBoardShowing = false
       }
     })

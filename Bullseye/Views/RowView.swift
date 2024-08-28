@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct RowView: View {
-  @Binding var index: Int
-  @Binding var score: Int
-  @Binding var date: Date
+  var index: Int
+  var score: Int
+  var date: Date
   var body: some View {
     HStack {
-      RoundedTextView(index: $index)
+      RoundedTextView(index: index)
         .padding(EdgeInsets(top: CGFloat(0), leading: CGFloat(0), bottom: CGFloat(0), trailing: CGFloat(Constants.General.roundedViewLength)))
-      ScoreText(score: $score)
+      ScoreText(score: score)
         .padding(EdgeInsets(top: CGFloat(0), leading: CGFloat(0), bottom: CGFloat(0), trailing: CGFloat(Constants.General.roundedViewLength)))
-      DateText(date: $date)
+      DateText(date: date)
         .padding()
     }
     .frame(height: Constants.General.roundedRectViewHeight)
@@ -28,7 +28,7 @@ struct RowView: View {
 }
 
 private struct RoundedTextView: View {
-  @Binding var index: Int
+  var index: Int
   var body: some View {
     Text(String(index))
       .bold()
@@ -43,7 +43,7 @@ private struct RoundedTextView: View {
 }
 
 private struct ScoreText: View {
-  @Binding var score: Int
+  var score: Int
   var body: some View {
     Text(String(score))
       .bold()
@@ -51,13 +51,13 @@ private struct ScoreText: View {
 }
 
 private struct DateText: View {
-  @Binding var date: Date
+  var date: Date
   var body: some View {
-    Text("12:31 PM")
+    Text(date.formatted(date: .omitted, time: .shortened))
       .bold()
   }
 }
 
 #Preview {
-  RowView(index: .constant(1), score: .constant(10), date: .constant(Date())).padding(10)
+  RowView(index: 1, score: 10, date: Date()).padding(10)
 }

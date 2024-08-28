@@ -8,16 +8,24 @@
 import SwiftUI
 
 struct LeaderBoardView: View {
+  @Binding var leaderboardEntries: [LeaderBoardEntry]
   var onCloseButtonClick: () -> Void
     var body: some View {
       ZStack {
         Color("AppBackground").ignoresSafeArea()
-        VStack {
+        VStack(spacing: 10) {
           LeaderboardHeaderView {
             onCloseButtonClick()
           }
           LeaderBoardTableHeaderView()
-          RowView(index: .constant(1), score: .constant(20), date: .constant(Date()))
+          ScrollView {
+            VStack {
+              ForEach(leaderboardEntries.indices, id: \.self) { index in
+                let entry = leaderboardEntries[index]
+                RowView(index: index + 1, score: entry.score, date: entry.time)
+              }
+            }
+          }
         }.padding(10)
       }
     }
@@ -61,6 +69,14 @@ struct LeaderboardHeaderView: View {
   }
 }
 
+
 #Preview {
-  LeaderBoardView {}
+  LeaderBoardView(leaderboardEntries: .constant([
+    LeaderBoardEntry(score: 200),
+    LeaderBoardEntry(score: 100),
+    LeaderBoardEntry(score: 50),
+    LeaderBoardEntry(score: 50),
+    LeaderBoardEntry(score: 50),
+    LeaderBoardEntry(score: 50),
+  ]), onCloseButtonClick: {})
 }

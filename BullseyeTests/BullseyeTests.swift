@@ -67,4 +67,25 @@ final class BullseyeTests: XCTestCase {
     XCTAssertEqual(game.score, 0)
     XCTAssertEqual(game.round, 1)
   }
+  
+  func testLeaderboard() {
+    game.startNewRound(score: 100)
+    XCTAssertEqual(game.leaderboardEntries.count, 1)
+    XCTAssertEqual(game.leaderboardEntries[0].score, 100)
+  }
+  
+  /**
+   Should be sorted from highest to lowest.
+   */
+  func testLeaderboardSort() {
+    game.startNewRound(score: 100)
+    game.startNewRound(score: 200)
+    XCTAssertEqual(game.leaderboardEntries[0].score, 200)
+  }
+  
+  func testLeaderboardNewItems() {
+    game.startNewRound(score: 100)
+    game.startNewRound(score: 200)
+    XCTAssertEqual(game.leaderboardEntries.count, 2)
+  }
 }
